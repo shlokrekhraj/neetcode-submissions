@@ -1,0 +1,24 @@
+class Solution:
+    def sortArray(self, nums):
+        if len(nums) <= 1:
+            return nums
+        mid = len(nums) // 2
+        nums1 = self.sortArray(nums[:mid])
+        nums2 = self.sortArray(nums[mid:])
+        return self.merge_sort(nums1, nums2)
+
+    def merge_sort(self, nums1, nums2):
+        result = []
+        i = j = 0
+
+        while i < len(nums1) and j < len(nums2):
+            if nums1[i] < nums2[j]:
+                result.append(nums1[i])
+                i += 1
+            else:
+                result.append(nums2[j])
+                j += 1
+
+        result.extend(nums1[i:])
+        result.extend(nums2[j:])
+        return result
